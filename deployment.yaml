@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: story-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: story
+  template:
+    metadata:
+      labels:
+        app: story
+    spec:
+      imagePullSecrets:
+      - name: harbor-secret
+      containers:
+      - name: story
+        image: harbor.bahur/node-app/nodejs-app:1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+
