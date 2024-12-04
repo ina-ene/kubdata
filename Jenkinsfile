@@ -30,7 +30,7 @@ pipeline {
                     // Log in to Harbor
                     docker.withRegistry('https://harbor.bahur:443', 'jenkins-harbor-robot') {
                         // Assuming your service name in docker-compose.yml is `nodejs-app`
-                        def serviceImageId = sh(script: "docker-compose -f docker-compose.yml images -q stories", returnStdout: true).trim()
+                        def serviceImageId = sh(script: "docker-compose -f docker-compose.yaml images -q stories", returnStdout: true).trim()
 
                         // Tag the image appropriately if necessary
                         // Assuming docker-compose.yml sets this image name and tag already, adjust if needed
