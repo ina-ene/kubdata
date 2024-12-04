@@ -4,7 +4,7 @@ pipeline {
         label 'nodejs'
     }
     environment {
-        DOCKER_IMAGE = 'harbor.bahur:443/nodejs/nodejs-app:latest'
+        DOCKER_IMAGE = 'harbor.bahur:443/node-app/nodejs-app:latest'
     }
 
     stages {
