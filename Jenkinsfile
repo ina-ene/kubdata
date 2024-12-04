@@ -18,8 +18,11 @@ pipeline {
         stage('Build Docker Image with Docker Compose') {
             steps {
                 script {
-                    // Build images as defined in docker-compose.yml
-                    sh 'docker-compose -f docker-compose.yaml build'
+                    // Set environment variable for docker-compose
+                    withEnv(["DOCKER_IMAGE=${env.DOCKER_IMAGE}"]) {
+                        // Build images as defined in docker-compose.yml and use the DOCKER_IMAGE as the tag
+                        sh 'docker-compose -f docker-compose.yaml build'
+                    }
                 }
             }
         }
@@ -29,10 +32,7 @@ pipeline {
                 script {
                     // Log in to Harbor
                     docker.withRegistry('https://harbor.bahur:443', 'jenkins-harbor-robot') {
-                        // Assuming your service name in docker-compose.yml is `nodejs-app`
-                        def serviceImageId = sh(script: "docker-compose -f docker-compose.yaml images -q stories", returnStdout: true).trim()
-
-                        // Push the tagged image to the registry
+                        // Push the image that's already tagged during the build
                         sh "docker push ${DOCKER_IMAGE}"
                     }
                 }

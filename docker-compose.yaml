@@ -2,6 +2,7 @@ version: "3"
 services:
   stories:
     build: .
+    image: ${DOCKER_IMAGE}
     volumes:
       - stories:/app/story
     ports:
