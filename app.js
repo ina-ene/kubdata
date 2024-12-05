@@ -33,7 +33,7 @@ app.post('/story', (req, res) => {
 });
 
 app.get('/error', () => {
-  ProcessingInstruction.exit(1)
+  process.exit(1)
 });
 
 app.listen(3000);

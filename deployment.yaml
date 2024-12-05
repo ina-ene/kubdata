@@ -16,7 +16,7 @@ spec:
       - name: harbor-secret
       containers:
       - name: story
-        image: harbor.bahur/node-app/nodejs-app:1
+        image: harbor.bahur/node-app/nodejs-app:simple
         resources:
           limits:
             memory: "128Mi"
